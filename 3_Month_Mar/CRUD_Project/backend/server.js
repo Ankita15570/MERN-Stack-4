@@ -30,12 +30,73 @@ const Items = new mongoose.model("Items", itemsSchema); //table or collection na
 //API
 
 // 1. Create Item
-app.post("/api/items", async (req, res) => {
+app.post("/api/create-item", async (req, res) => {
   try {
-    const newItem = new Items(req.body);
-    await newItem.save();
-    res.status(201).json(newItem);
+    const { name, description, sellingprice } = req.body;
+    const saveItem = new Items({
+      name,
+      description,
+      sellingprice,
+    });
+    await saveItem.save();
+    res
+      .status(201)
+      .json({ message: "Item created successfully", item: saveItem });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error(error);
   }
+});
+
+// 2. Update Item
+app.put("/api/update-item/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, sellingprice } = req.body;
+    const updateItem = await Items.findByIdAndUpdate(
+      id,
+      { name, description, sellingprice },
+      { new: true },
+    );
+    if (!updateItem) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+    res.json({ message: "Item updated successfully", item: updateItem });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// 3. Delete Item
+app.delete("/api/delete-item/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteItem = await Items.findByIdAndDelete(id);
+    if (!deleteItem) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+    res.json({ message: "Item deleted successfully", item: deleteItem });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// 4. Get all records
+app.get("/api/get-all-items", async (req, res) => {
+  try {
+    const items = await Items.find();
+    res.json({ message: "Get all items List", items });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// Health Start API
+app.get("/health", (req, res) => {
+  res.status(200).json({ message: "Server is Running" });
+});
+
+// Server start
+const PORT = 9090;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
