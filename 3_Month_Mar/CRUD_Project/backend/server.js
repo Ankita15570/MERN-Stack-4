@@ -8,95 +8,90 @@ console.log("Hello Node js project started");
 
 const express = require("express");
 const app = express();
-
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 
+//DB connection
 mongoose
   .connect("mongodb://127.0.0.1:27017/Item-database")
   .then(() => console.log("mongo DB connected"))
-  .catch((error) => console.log("MongoDB connection error:", error));
+  .catch((error) => console.log("error"));
 
 //schema-model-database table structure
 const itemsSchema = new mongoose.Schema({
   name: String,
   description: String,
   sellingprice: Number,
+  purchaseprice: Number,
+  quantity: Number,
+  unit: String,
 });
 
 const Items = new mongoose.model("Items", itemsSchema); //table or collection name
 
-//API
+//API -
 
-// 1. Create Item
-app.post("/api/create-item", async (req, res) => {
+// API-1. Create Items
+app.post("/api/create-items", async (req, res) => {
   try {
-    const { name, description, sellingprice } = req.body;
+    const { name, description, sellingprice, purchaseprice, quantity, unit } =
+      req.body;
+
     const saveItem = new Items({
       name,
       description,
       sellingprice,
+      purchaseprice,
+      quantity,
+      unit,
     });
+
     await saveItem.save();
-    res
-      .status(201)
-      .json({ message: "Item created successfully", item: saveItem });
+
+    res.status(201).json({ message: "Items Created", data: saveItem });
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 });
 
-// 2. Update Item
-app.put("/api/update-item/:id", async (req, res) => {
+// API-2. Update Items
+app.put("/api/Update-items", async (req, res) => {
   try {
-    const { id } = req.params;
-    const { name, description, sellingprice } = req.body;
-    const updateItem = await Items.findByIdAndUpdate(
-      id,
-      { name, description, sellingprice },
-      { new: true },
-    );
-    if (!updateItem) {
-      return res.status(404).json({ error: "Item not found" });
-    }
-    res.json({ message: "Item updated successfully", item: updateItem });
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 });
 
-// 3. Delete Item
-app.delete("/api/delete-item/:id", async (req, res) => {
+// API-3. delete Items
+app.delete("/api/delete-items", async (req, res) => {
   try {
-    const { id } = req.params;
-    const deleteItem = await Items.findByIdAndDelete(id);
-    if (!deleteItem) {
-      return res.status(404).json({ error: "Item not found" });
-    }
-    res.json({ message: "Item deleted successfully", item: deleteItem });
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 });
 
-// 4. Get all records
+// API-4. get all Items
 app.get("/api/get-all-items", async (req, res) => {
   try {
     const items = await Items.find();
-    res.json({ message: "Get all items List", items });
+
+    res.status(200).json({ message: " Get All Items List", data: items });
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 });
 
-// Health Start API
-app.get("/health", (req, res) => {
-  res.status(200).json({ message: "Server is Running" });
+//helth API
+app.get("/helth", (req, res) => {
+  res.status(200).json({ message: "Server is Runing" });
 });
 
-// Server start
+//server start
 const PORT = 9090;
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log("Server Started");
 });
