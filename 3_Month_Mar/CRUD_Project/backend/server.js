@@ -1,27 +1,26 @@
 //API
 // 1. API Create Item - get data values from front end (Item details) and store into Database
-// 2. API Update Item - get Item Details from Front end which item we need to update
-// 3. API Delete Item -  get Item Details from Front end an delete this record from database
-// 4. API get all records - get all records from DB and show to UI frontend
+// 2. API get all records - get all records from DB and show to UI frontend
 
 console.log("Hello Node js project started");
 
-const express = require("express");
+const express = require("express"); // sever use
 const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
+const mongoose = require("mongoose"); // DB connection use
+const cors = require("cors"); // react frontend and backend communication permission
 
 app.use(express.json());
 app.use(cors());
 
 //DB connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Item-database")
+  .connect("mongodb://127.0.0.1:27017/Item-database") //localhost-mongodb-item database-databse connected
   .then(() => console.log("mongo DB connected"))
   .catch((error) => console.log("error"));
 
 //schema-model-database table structure
 const itemsSchema = new mongoose.Schema({
+  // blueprint
   name: String,
   description: String,
   sellingprice: Number,
@@ -30,7 +29,7 @@ const itemsSchema = new mongoose.Schema({
   unit: String,
 });
 
-const Items = new mongoose.model("Items", itemsSchema); //table or collection name
+const Items = new mongoose.model("Items", itemsSchema); // item name model create - table collection create
 
 //API -
 
@@ -38,7 +37,7 @@ const Items = new mongoose.model("Items", itemsSchema); //table or collection na
 app.post("/api/create-items", async (req, res) => {
   try {
     const { name, description, sellingprice, purchaseprice, quantity, unit } =
-      req.body;
+      req.body; //req.body madhe aalela data seprate kela jato // froentend data-req.body madhe yeto
 
     const saveItem = new Items({
       name,
@@ -49,7 +48,7 @@ app.post("/api/create-items", async (req, res) => {
       unit,
     });
 
-    await saveItem.save();
+    await saveItem.save(); // store /save database perment
 
     res.status(201).json({ message: "Items Created", data: saveItem });
   } catch (error) {
@@ -76,10 +75,11 @@ app.delete("/api/delete-items", async (req, res) => {
 // API-4. get all Items
 app.get("/api/get-all-items", async (req, res) => {
   try {
-    const items = await Items.find();
+    const items = await Items.find(); //database all record find
 
-    res.status(200).json({ message: " Get All Items List", data: items });
+    res.status(200).json({ message: " Get All Items List", data: items }); //all data data:item - frntend pathvala jato -
   } catch (error) {
+    // and table show
     console.log(error);
   }
 });

@@ -5,36 +5,62 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Table from "react-bootstrap/Table";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 import "./style.css";
 import { useState } from "react";
 import { useEffect } from "react";
 
 function App() {
   const [itemName, setItemName] = useState();
+  const [itemDiscription, setItemDiscription] = useState();
+  const [itemPurchasePrice, setItemPurchasePrice] = useState();
+  const [itemSellingPrice, setItemSellingPrice] = useState();
+  const [itemQuantity, setItemQuantity] = useState();
+  const [itemUnit, setItemUnit] = useState();
   const [itemData, setData] = useState();
 
   console.log(itemName, "Typing Input field");
 
-  const handleOnChange = (event) => {
-    setItemName(event.target.value);
-    console.log("Item Name value");
-  };
+  // const handleOnChange = (event) => {
+  //   setItemName(event.target.value);
+  //   console.log("Item Name value");
+  // };
 
-  function SubmitForm(e) {
-    e.preventDefault();
+  async function SubmitForm(e) {
+    try {
+      e.preventDefault();
 
-    console.log("Form Submitted");
+      const data = {
+        name: itemName,
+        description: itemDiscription,
+        purchaseprice: itemPurchasePrice,
+        sellingprice: itemSellingPrice,
+        quantity: itemQuantity,
+        unit: itemUnit,
+      };
 
-    toast.success("Form Submitted", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+      console.log(data, "Form Submitted");
+
+      const apiResponse = await axios
+        .post("http://localhost:9090/api/create-items", data)
+        .then(console.log("Yes"))
+        .catch((err) => console.log(err));
+
+      console.log(apiResponse);
+      getAllItemsData();
+      toast.success("Form Submitted", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const getAllItemsData = async () => {
@@ -72,13 +98,15 @@ function App() {
         theme="light"
       />
 
-      <h1 className="text-danger text-center my-5">
+      <h2 className="text-danger text-center my-5">
         CRUD - MERN STACK PROJECT
-      </h1>
+      </h2>
       <div className="container">
         <div className="row">
           <div className=" column col-md-6 ">
             <h3 className="border text-center">Create Item</h3>
+
+            {/* <form action=""> */}
             <Form className="form my-5">
               <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
@@ -87,13 +115,19 @@ function App() {
                   <Form.Control
                     type="text"
                     placeholder="Enter Item Name"
-                    onChange={() => handleOnChange(event)}
+                    onChange={(event) => setItemName(event.target.value)}
+                    value={itemName}
                   />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridZip">
                   <Form.Label>Discription</Form.Label>
-                  <Form.Control type="text" placeholder="Enter Discription" />
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Discription"
+                    onChange={(event) => setItemDiscription(event.target.value)}
+                    value={itemDiscription}
+                  />
                 </Form.Group>
               </Row>
 
@@ -103,6 +137,10 @@ function App() {
                   <Form.Control
                     type="Number"
                     placeholder="Enter Purchase Price"
+                    onChange={(event) =>
+                      setItemPurchasePrice(event.target.value)
+                    }
+                    value={itemPurchasePrice}
                   />
                 </Form.Group>
 
@@ -111,6 +149,10 @@ function App() {
                   <Form.Control
                     type="Number"
                     placeholder="Enter Selling Price"
+                    onChange={(event) =>
+                      setItemSellingPrice(event.target.value)
+                    }
+                    value={itemSellingPrice}
                   />
                 </Form.Group>
               </Row>
@@ -118,12 +160,21 @@ function App() {
               <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridCity">
                   <Form.Label>Quantity</Form.Label>
-                  <Form.Control type="Number" placeholder="Enter Quantity" />
+                  <Form.Control
+                    type="Number"
+                    placeholder="Enter Quantity"
+                    onChange={(event) => setItemQuantity(event.target.value)}
+                    value={itemQuantity}
+                  />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Unit</Form.Label>
-                  <Form.Select defaultValue="Choose Unit">
+                  <Form.Select
+                    defaultValue="Choose Unit"
+                    value={itemUnit}
+                    onChange={(event) => setItemUnit(event.target.value)}
+                  >
                     <option>Choose Unit</option>
                     <option>Pice</option>
                     <option>Box</option>
