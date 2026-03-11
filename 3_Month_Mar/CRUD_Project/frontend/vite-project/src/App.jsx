@@ -1,17 +1,17 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"; //design and ul
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Table from "react-bootstrap/Table";
-import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
+import { ToastContainer, toast } from "react-toastify"; //massage show
+import axios from "axios"; //backend apl data
 import "./style.css";
-import { useState } from "react";
+import { useState } from "react"; //store data and page load
 import { useEffect } from "react";
 
 function App() {
-  const [itemName, setItemName] = useState();
+  const [itemName, setItemName] = useState(); // user form
   const [itemDiscription, setItemDiscription] = useState();
   const [itemPurchasePrice, setItemPurchasePrice] = useState();
   const [itemSellingPrice, setItemSellingPrice] = useState();
@@ -28,9 +28,10 @@ function App() {
 
   async function SubmitForm(e) {
     try {
-      e.preventDefault();
+      e.preventDefault(); // page refresh
 
       const data = {
+        //create obeject-data
         name: itemName,
         description: itemDiscription,
         purchaseprice: itemPurchasePrice,
@@ -42,13 +43,14 @@ function App() {
       console.log(data, "Form Submitted");
 
       const apiResponse = await axios
-        .post("http://localhost:9090/api/create-items", data)
+        .post("http://localhost:9090/api/create-items", data) //data axios.post transfer in db
         .then(console.log("Yes"))
         .catch((err) => console.log(err));
 
       console.log(apiResponse);
       getAllItemsData();
       toast.success("Form Submitted", {
+        // perment data save then toast.success-message then getallitems data call -update tabel
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -69,7 +71,7 @@ function App() {
         "http://localhost:9090/api/get-all-items",
       );
       const responseData = await apiResponse.json();
-      setData(responseData.data);
+      setData(responseData.data); //data-item-data-store
 
       console.log(responseData);
     } catch (error) {
@@ -78,6 +80,7 @@ function App() {
   };
 
   useEffect(() => {
+    //page open then useEffect hook automatic getall funn call
     getAllItemsData();
   }, []);
 
@@ -115,7 +118,7 @@ function App() {
                   <Form.Control
                     type="text"
                     placeholder="Enter Item Name"
-                    onChange={(event) => setItemName(event.target.value)}
+                    onChange={(event) => setItemName(event.target.value)} //update itemsname
                     value={itemName}
                   />
                 </Form.Group>
@@ -190,7 +193,7 @@ function App() {
                   variant="primary"
                   type="submit"
                   className="w-50"
-                  onClick={SubmitForm}
+                  onClick={SubmitForm} //run submit form function
                 >
                   Submit
                 </Button>
@@ -207,7 +210,7 @@ function App() {
                   <th>Item Name</th>
                   <th>Discription</th>
                   <th>Purchase Price</th>
-                  <th>Selling Price</th>
+                  <th>Selling Price</th> // table inputname
                   <th>Quantity</th>
                   <th>Unit</th>
                   <th>Action</th>
@@ -216,6 +219,7 @@ function App() {
               <tbody>
                 {itemData &&
                   itemData.map((each, index) => {
+                    //db-inputfill-show rows
                     return (
                       <tr>
                         <td>{index + 1}</td>
