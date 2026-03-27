@@ -21,9 +21,9 @@ getData(callBackFunction);
 // Output: Hello Get Data, Call Back Function Called
 
 // 2. Promises - Asynchronous code
-// 1. Resolve - Success
-// 2. Reject - Failure
-// 3. Pending - Waiting for the result
+// . Resolve - Success
+// . Reject - Failure
+// . Pending - Waiting for the result
 
 const myPromise = new Promise((resolve, reject) => {
   const error = false;
