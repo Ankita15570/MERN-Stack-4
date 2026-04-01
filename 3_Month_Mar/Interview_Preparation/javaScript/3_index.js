@@ -55,3 +55,15 @@ if (a === b) {
   console.log(false);
 }
 // Output: False
+
+// Higher Order Function
+
+function onefunction(name) {
+  const a = 5;
+  console.log(a);
+  return "Hello " + name;
+  // var b = 10
+  // console.log(b)
+}
+console.log(onefunction());
+// Output: 5
