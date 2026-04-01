@@ -35,3 +35,23 @@ console.log(outer());
   console.log("This is a SIFE");
 })();
 // Output: This is a SIFE
+
+// == vs ===
+// == check only value both side
+// === check value and Data Types also
+
+const a = 10;
+const b = "10";
+if (a == b) {
+  console.log(true);
+} else {
+  console.log(false);
+}
+// Output: True
+
+if (a === b) {
+  console.log(true);
+} else {
+  console.log(false);
+}
+// Output: False
