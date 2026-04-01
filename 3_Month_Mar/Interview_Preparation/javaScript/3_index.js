@@ -67,3 +67,15 @@ function onefunction(name) {
 }
 console.log(onefunction());
 // Output: 5
+
+// Destructuring Array
+let arr = [1, 2, 3];
+let [x, y, z] = arr;
+console.log(x, y, z);
+// Output: 1 2 3
+
+// Destructuring Object
+let obj = { name: "Anshu", age: 19 };
+let { name, age } = obj;
+console.log(name, age);
+// Output: Anshu 19
