@@ -68,6 +68,10 @@ function onefunction(name) {
 console.log(onefunction());
 // Output: 5
 
+// destructuring array and object
+// Extract values esaily from array and object
+// makes code more shorter, readable and cleaner
+
 // Destructuring Array
 let arr = [1, 2, 3];
 let [x, y, z] = arr;
