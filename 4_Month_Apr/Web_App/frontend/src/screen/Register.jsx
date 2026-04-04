@@ -7,9 +7,9 @@ const Register = () => {
       <input type="text" placeholder="Enter Name" />
       <input type="email" placeholder="Enter Email" />
       <input type="password" placeholder="Enter Password" />
-      <button>Login</button>
+      <button>Register</button>
       <p className="text-danger">
-        Already have an account? <a href="/Register">Register</a>
+        Already have an account? <a href="/">Login</a>
       </p>
     </div>
   );

@@ -111,174 +111,173 @@ function Home() {
 
   return (
     <>
-      <AuthNavBar>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+      <AuthNavBar />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
 
-        <h1 className="text-danger text-center my-5">
-          CRUD - MERN STACK PROJECT
-        </h1>
-        <div className="container">
-          <div className="row">
-            <div className="column col-md-6">
-              <h3 className="border text-center">Create Item</h3>
+      <h1 className="text-danger text-center my-5">
+        CRUD - MERN STACK PROJECT
+      </h1>
+      <div className="container">
+        <div className="row">
+          <div className="column col-md-6">
+            <h3 className="border text-center">Create Item</h3>
 
-              <Form className="form my-5">
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="formGridEmail">
-                    <Form.Label>Item Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Item Name"
-                      onChange={(event) => setItemName(event.target.value)}
-                      value={itemName}
-                    />
-                  </Form.Group>
+            <Form className="form my-5">
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                  <Form.Label>Item Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Item Name"
+                    onChange={(event) => setItemName(event.target.value)}
+                    value={itemName}
+                  />
+                </Form.Group>
 
-                  <Form.Group as={Col} controlId="formGridZip">
-                    <Form.Label>Discription</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Discription"
-                      onChange={(event) => setDiscription(event.target.value)}
-                      value={discription}
-                    />
-                  </Form.Group>
-                </Row>
+                <Form.Group as={Col} controlId="formGridZip">
+                  <Form.Label>Discription</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Discription"
+                    onChange={(event) => setDiscription(event.target.value)}
+                    value={discription}
+                  />
+                </Form.Group>
+              </Row>
 
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="formGridPassword">
-                    <Form.Label>Purchase Price </Form.Label>
-                    <Form.Control
-                      type="Number"
-                      placeholder="Enter Purchase Price"
-                      onChange={(event) => setPurchasePrice(event.target.value)}
-                      value={purchasePrice}
-                    />
-                  </Form.Group>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridPassword">
+                  <Form.Label>Purchase Price </Form.Label>
+                  <Form.Control
+                    type="Number"
+                    placeholder="Enter Purchase Price"
+                    onChange={(event) => setPurchasePrice(event.target.value)}
+                    value={purchasePrice}
+                  />
+                </Form.Group>
 
-                  <Form.Group as={Col} controlId="formGridAddress1">
-                    <Form.Label>Selling Price</Form.Label>
-                    <Form.Control
-                      type="Number"
-                      placeholder="Enter Selling Price"
-                      onChange={(event) => setSellingPrice(event.target.value)}
-                      value={sellingPrice}
-                    />
-                  </Form.Group>
-                </Row>
+                <Form.Group as={Col} controlId="formGridAddress1">
+                  <Form.Label>Selling Price</Form.Label>
+                  <Form.Control
+                    type="Number"
+                    placeholder="Enter Selling Price"
+                    onChange={(event) => setSellingPrice(event.target.value)}
+                    value={sellingPrice}
+                  />
+                </Form.Group>
+              </Row>
 
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="formGridCity">
-                    <Form.Label>Quantity</Form.Label>
-                    <Form.Control
-                      type="Number"
-                      placeholder="Enter Quantity"
-                      onChange={(event) => setQuantity(event.target.value)}
-                      value={quantity}
-                    />
-                  </Form.Group>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridCity">
+                  <Form.Label>Quantity</Form.Label>
+                  <Form.Control
+                    type="Number"
+                    placeholder="Enter Quantity"
+                    onChange={(event) => setQuantity(event.target.value)}
+                    value={quantity}
+                  />
+                </Form.Group>
 
-                  <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Unit</Form.Label>
-                    <Form.Select
-                      defaultValue="Choose Unit"
-                      onChange={(event) => setUnit(event.target.value)}
-                      value={unit}
-                    >
-                      <option>Choose Unit</option>
-                      <option>Pice</option>
-                      <option>Box</option>
-                      <option>Kg</option>
-                      <option>Gram</option>
-                      <option>Littar</option>
-                    </Form.Select>
-                  </Form.Group>
-                </Row>
-
-                <div className="text-center">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="w-50"
-                    onClick={SubmitForm}
+                <Form.Group as={Col} controlId="formGridState">
+                  <Form.Label>Unit</Form.Label>
+                  <Form.Select
+                    defaultValue="Choose Unit"
+                    onChange={(event) => setUnit(event.target.value)}
+                    value={unit}
                   >
-                    Submit
-                  </Button>
-                </div>
-              </Form>
-            </div>
+                    <option>Choose Unit</option>
+                    <option>Pice</option>
+                    <option>Box</option>
+                    <option>Kg</option>
+                    <option>Gram</option>
+                    <option>Littar</option>
+                  </Form.Select>
+                </Form.Group>
+              </Row>
 
-            <div className="col-md-6">
-              <h3 className=" border text-center">Get List</h3>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Item Name</th>
-                    <th>Discription</th>
-                    <th>Purchase Price</th>
-                    <th>Selling Price</th>
-                    <th>Quantity</th>
-                    <th>Unit</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {itemData &&
-                    itemData.map((each, index) => {
-                      return (
-                        <tr>
-                          <td>{index + 1}</td>
-                          <td>{each.name}</td>
-                          <td>{each.discription}</td>
-                          <td>{each.purchasePrice}</td>
-                          <td>{each.sellingPrice}</td>
-                          <td>{each.quantity}</td>
-                          <td>{each.unit}</td>
-                          <td className="d-flex">
-                            <button className="btn btn-success">Edit</button>
-                            <button
-                              className="btn btn-danger mx-2"
-                              onClick={() => openDeleteModel(each._id)}
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                </tbody>
-              </Table>
-            </div>
+              <div className="text-center">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="w-50"
+                  onClick={SubmitForm}
+                >
+                  Submit
+                </Button>
+              </div>
+            </Form>
+          </div>
+
+          <div className="col-md-6">
+            <h3 className=" border text-center">Get List</h3>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Item Name</th>
+                  <th>Discription</th>
+                  <th>Purchase Price</th>
+                  <th>Selling Price</th>
+                  <th>Quantity</th>
+                  <th>Unit</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {itemData &&
+                  itemData.map((each, index) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{each.name}</td>
+                        <td>{each.discription}</td>
+                        <td>{each.purchasePrice}</td>
+                        <td>{each.sellingPrice}</td>
+                        <td>{each.quantity}</td>
+                        <td>{each.unit}</td>
+                        <td className="d-flex">
+                          <button className="btn btn-success">Edit</button>
+                          <button
+                            className="btn btn-danger mx-2"
+                            onClick={() => openDeleteModel(each._id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </Table>
           </div>
         </div>
+      </div>
 
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title> Delete Confirmation </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Are you sure want to delete this Item</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleDelete}>
-              Yes
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              No
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </AuthNavBar>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title> Delete Confirmation </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure want to delete this Item</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleDelete}>
+            Yes
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
