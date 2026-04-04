@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomePage from "../src/screen/homePage";
+import Home from "../src/screen/Home";
 
 const App = () => {
   return (
     <div>
-      <HomePage />
+      <Home />
     </div>
   );
 };

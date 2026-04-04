@@ -11,7 +11,7 @@ import "./../style.css";
 import { useState } from "react";
 import { useEffect } from "react";
 
-function HomePage() {
+function Home() {
   const [itemName, setItemName] = useState();
   const [discription, setDiscription] = useState();
   const [purchasePrice, setPurchasePrice] = useState();
@@ -280,4 +280,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Home;

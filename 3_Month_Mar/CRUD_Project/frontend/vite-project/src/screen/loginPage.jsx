@@ -1,6 +1,6 @@
 import React from "react";
 
-const loginPage = () => {
+const Login = () => {
   return (
     <div>
       <h2>Login</h2>
@@ -8,4 +8,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default Login;
